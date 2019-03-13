@@ -5,22 +5,41 @@ import { NavLink } from 'react-router-dom';
 class Header extends Component {
     render() {
         return (
-            <header className="bg-dark fixed-top py-2">
-                <ul className="nav justify-content-around">
-                    <li className="nav-item">
-                        <NavLink className="nav-link active text-white" to="/">Home</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink to="/register" className="nav-link text-white">Register</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link text-white" to="/login">Login</NavLink>
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link disabled text-white" to="#">Disabled</NavLink>
-                    </li>
-                </ul>
-            </header>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                <div className="container">
+                    <NavLink className="navbar-brand" to="/">MyBlog</NavLink>
+                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+                    <div className="collapse navbar-collapse" id="navbarResponsive">
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item active">
+                                <NavLink className="nav-link active text-white" to="/">Home</NavLink>
+                            </li> 
+                            {
+                                this.props.username ? 
+                            (<li className="nav-item">
+                                <NavLink to="/" className="nav-link text-white">Welcome {this.props.username}!</NavLink>
+                            </li>)
+                            :
+                            (<li className="nav-item">
+                                <NavLink to="/register" className="nav-link text-white">Register</NavLink>
+                            </li>)
+                            }
+                            {
+                                this.props.username ? 
+                            (<li className="nav-item">
+                                <NavLink className="nav-link text-white" to="/login">Logout</NavLink>
+                            </li>)
+                            :
+                            (<li className="nav-item">
+                                <NavLink className="nav-link text-white" to="/login">Login</NavLink>
+                            </li>)
+                            }                         
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         )
     }
 }

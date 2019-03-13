@@ -12,8 +12,14 @@ import Footer from './components/footer';
 
 class App extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      username: null
+    }
+  }
+
   handleChange(e) {
-    console.log(e.target.name, '=>', e.target.value);
     this.setState ({
       [e.target.name]: e.target.value
     })
@@ -26,21 +32,28 @@ class App extends Component {
       method: 'post',
       body: JSON.stringify(data),
       headers: {'Content-Type': 'application/json'}
-    })
+    }).then(rawData => rawData.json())
+      .then(responseBody => {
+        if(responseBody.username) {
+          this.setState({
+            username: responseBody.username
+          })
+        }
+      })
   }
 
   render() {
     return (
       <div>
-          <Header/>
+          <Header username={this.state.username}/>
           <Switch>
             <Route path="/" exact component={Home}/>
             <Route render={
-              () => <Register handleSubmit={this.handleSubmit}
+              () => <Register handleSubmit={this.handleSubmit.bind(this)}
               handleChange={this.handleChange}/>
               } path="/register" />
             <Route render={
-              () => <Login handleSubmit={this.handleSubmit}
+              () => <Login handleSubmit={this.handleSubmit.bind(this)}
               handleChange={this.handleChange}/>
               }path="/login"/>
           </Switch>
