@@ -2,21 +2,49 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
+import Home from './components/home';
 import Register from './components/register';
 import Login from './components/login';
 import Header from './components/header';
 import Footer from './components/footer';
 
+
+
 class App extends Component {
+
+  handleChange(e) {
+    console.log(e.target.name, '=>', e.target.value);
+    this.setState ({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleSubmit(e, data, isSignup) {
+    e.preventDefault();
+    console.log(data)
+    fetch('http://localhost:9999/auth/sign' + (isSignup ? 'up' : 'in'), {
+      method: 'post',
+      body: JSON.stringify(data),
+      headers: {'Content-Type': 'application/json'}
+    })
+  }
+
   render() {
     return (
       <div>
-        <Header/>
-        <Switch>
-          <Route path="/register" component={Register}/>
-          <Route path="/login" component={Login}/>
-        </Switch>
-        <Footer/>
+          <Header/>
+          <Switch>
+            <Route path="/" exact component={Home}/>
+            <Route render={
+              () => <Register handleSubmit={this.handleSubmit}
+              handleChange={this.handleChange}/>
+              } path="/register" />
+            <Route render={
+              () => <Login handleSubmit={this.handleSubmit}
+              handleChange={this.handleChange}/>
+              }path="/login"/>
+          </Switch>
+            <Footer/>
       </div>
     );
   }
