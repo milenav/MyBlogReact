@@ -13,19 +13,18 @@ class Login extends Component {
 
     render() {
         return (
-            <form className="form-control" onSubmit={(e) => this.props.handleSubmit(e, this.state, false)}>
-                <h1>Login</h1>
+            <form className="form-control-sm" onSubmit={(e) => this.props.handleSubmit(e, this.state, false)}>
 
-                <div className="form-group">
+                <div className="form-group-sm">
                     <label htmlFor="username">Username</label>
                     <input className="form-control" type="text" onChange={this.handleChange} name="username" placeholder="Username"/>
                 </div>
-                <div className="form-group">
+                <div className="form-group-sm">
                     <label htmlFor="password">Password</label>
-                    <input className="form-control" type="password" onChange={this.handleChange} name="password" placeholder="Password"/>
+                    <input className="form-control" type="password" onChange={this.handleChange} name="password" placeholder="******"/>
                     <small>We'll never share your rassword with anyone else.</small>
                 </div>
-                <button className="btn btn-outline-secondary" type="submit">Login</button>
+                <button className="btn btn-outline-primary" type="submit">Login</button>
             </form>
         )
     }

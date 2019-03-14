@@ -1,4 +1,17 @@
 .form-group {
     width: 30rem;
+    margin: 30px 100px 10px 400px;
+}
+
+.form-control-sm {
+    padding: 5.25rem .5rem;
+}
+
+.btn-outline-primary {
     margin: 10px 100px 10px 400px;
+}
+
+.form-group-sm {
+    width: 30rem;
+    margin: 50px 100px 10px 400px; 
 }

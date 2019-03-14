@@ -16,7 +16,7 @@ class Register extends Component {
     render() {
         return (
             <form className="form-control-sm" onSubmit={(e) => this.props.handleSubmit(e, this.state, true)}>
-                <h1>Register</h1>
+
                 <div className="form-group">
                     <label htmlFor="email">Email address</label>
                     <input className="form-control" type="email" onChange={this.handleChange} name="email" placeholder="Email"/>
@@ -28,10 +28,10 @@ class Register extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Password</label>
-                    <input className="form-control" type="password" onChange={this.handleChange} name="password" placeholder="Password"/>
+                    <input className="form-control" type="password" onChange={this.handleChange} name="password" placeholder="******"/>
                     <small>We'll never share your rassword with anyone else.</small>
                 </div>
-                <button className="btn btn-outline-secondary" type="submit">Register</button>
+                <button className="btn btn-outline-primary" type="submit">Register</button>
             </form>
         )
     }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { FaBraille } from 'react-icons/fa';
 
 
 class Header extends Component {
@@ -7,7 +8,7 @@ class Header extends Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div className="container">
-                    <NavLink className="navbar-brand" to="/">MyBlog</NavLink>
+                    <NavLink className="navbar-brand" to="/"><FaBraille/>      MyBlog</NavLink>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
@@ -29,7 +30,7 @@ class Header extends Component {
                             {
                                 this.props.username ? 
                             (<li className="nav-item">
-                                <NavLink className="nav-link text-white" to="/login">Logout</NavLink>
+                                <NavLink className="nav-link text-white" to="/">Logout</NavLink>
                             </li>)
                             :
                             (<li className="nav-item">
