@@ -7,6 +7,7 @@ import Register from './components/register';
 import Login from './components/login';
 import Header from './components/header';
 import Footer from './components/footer';
+import Contact from './components/contact';
 
 
 
@@ -15,7 +16,8 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      username: null
+      username: null,
+      isAdmin: false
     }
   }
 
@@ -36,7 +38,8 @@ class App extends Component {
       .then(responseBody => {
         if(responseBody.username) {
           this.setState({
-            username: responseBody.username
+            username: responseBody.username, 
+            isAdmin: responseBody.isAdmin
           })
         }
       })
@@ -45,7 +48,7 @@ class App extends Component {
   render() {
     return (
       <div>
-          <Header username={this.state.username}/>
+          <Header isAdmin={this.state.isAdmin} username={this.state.username}/>
           <Switch>
             <Route path="/" exact component={Home}/>
             <Route render={
@@ -56,7 +59,9 @@ class App extends Component {
               () => <Login handleSubmit={this.handleSubmit.bind(this)}
               handleChange={this.handleChange}/>
               }path="/login"/>
+            <Route path="/contact" component={Contact}/>
           </Switch>
+
             <Footer/>
       </div>
     );
