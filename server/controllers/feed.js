@@ -31,5 +31,22 @@ module.exports = {
       }
       next(error);
     });
+  },
+  getPostsByCategory: (req, res) => {
+    const category = req.params.category;
+    Post.find({categories: {
+      $all: [category]
+    }})
+      .then((posts) => {
+        res
+          .status(200)
+          .json({ message: `${category} posts fetched.`, posts })
+      })
+      .catch((error) => {
+        if (!error.statusCode) {
+          error.statusCode = 500;
+        }
+        next(error);
+      });
   }
 }

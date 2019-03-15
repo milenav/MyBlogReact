@@ -43,7 +43,7 @@ class Header extends Component {
                             {
                                 this.props.isAdmin ?
                             (<li className="nav-item">
-                            <NavLink className="nav-link text-white" to="/login">Create</NavLink>
+                            <NavLink className="nav-link text-white" to="/create">Create</NavLink>
                             </li>) 
                             : null                            
                             }  

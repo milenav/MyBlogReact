@@ -7,6 +7,10 @@
     padding: 5.25rem .5rem;
 }
 
+.form-control-lg {
+    padding: 5.25rem .5rem;
+}
+
 .btn-outline-primary {
     margin: 10px 100px 10px 400px;
 }
@@ -15,3 +19,4 @@
     width: 30rem;
     margin: 50px 100px 10px 400px; 
 }
+

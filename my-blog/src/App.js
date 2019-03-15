@@ -8,6 +8,7 @@ import Login from './components/login';
 import Header from './components/header';
 import Footer from './components/footer';
 import Contact from './components/contact';
+import CreatePost from './components/create';
 
 
 
@@ -17,7 +18,8 @@ class App extends Component {
     super(props);
     this.state = {
       username: null,
-      isAdmin: false
+      isAdmin: false,
+      posts: []
     }
   }
 
@@ -25,6 +27,17 @@ class App extends Component {
     this.setState ({
       [e.target.name]: e.target.value
     })
+  }
+
+  handleCreateSubmit(e, data) {
+    e.preventDefault();
+    console.log(data)
+    fetch('http://localhost:9999/feed/post/create', {
+      method: 'post',
+      body: JSON.stringify(data),
+      headers: {'Content-Type': 'application/json'}
+    }).then(rawData => rawData.json())
+    .then(body => console.log(body))
   }
 
   handleSubmit(e, data, isSignup) {
@@ -51,6 +64,10 @@ class App extends Component {
           <Header isAdmin={this.state.isAdmin} username={this.state.username}/>
           <Switch>
             <Route path="/" exact component={Home}/>
+            <Route render={
+              () => <CreatePost handleCreateSubmit={this.handleCreateSubmit.bind(this)}
+              handleChange={this.handleChange}/>
+              } path="/create" />
             <Route render={
               () => <Register handleSubmit={this.handleSubmit.bind(this)}
               handleChange={this.handleChange}/>
