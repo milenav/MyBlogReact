@@ -7,8 +7,12 @@ import Register from './components/register';
 import Login from './components/login';
 import Header from './components/header';
 import Footer from './components/footer';
+import Logout from './components/logout';
 import Contact from './components/contact';
 import CreatePost from './components/create';
+
+import PostDetails from './components/details';
+import AuthorizedRoute from './components/authorized-route';
 
 
 
@@ -19,12 +23,15 @@ class App extends Component {
     this.state = {
       username: null,
       isAdmin: false,
-      posts: []
+      posts: [],
+      selectedPostId: 0
     }
   }
 
+
   componentWillMount () {
-    const isAdmin = localStorage.getItem('isAdmin');
+    const isAdmin = localStorage.getItem('isAdmin') === true;
+    console.log(isAdmin)
 
     if(localStorage.getItem('username')){
       this.setState({
@@ -76,30 +83,55 @@ class App extends Component {
       })
   }
 
+  onLogout(data) {
+    localStorage.clear();
+    data.auth().signOut()
+      .then(() => {
+        this.setState({
+          username: false,
+          isAdmin:false
+        });
+      });
+    this.props.history.push('/');
+  }
+
   render() {
     return (
       <div>
-          <Header isAdmin={this.state.isAdmin} username={this.state.username}/>
+          <Header isAdmin={this.state.isAdmin} username={this.state.username} onLogout={this.onLogout}/>
           <Switch>
+          <Route render={
+              (props) => <PostDetails {...props} 
+              post={this.state.posts[this.state.selectedPostId]} />
+              } path="/post/:id" />
+            
             <Route exact render={
-              () => <Home posts={this.state.posts}/>
+              (props) => <Home {...props} posts={this.state.posts}/>
               } path="/" />
+            
             <Route render={
-              () => 
+              (props) => 
               this.state.isAdmin ?
-              <CreatePost handleCreateSubmit={this.handleCreateSubmit.bind(this)}
+              <CreatePost {...props}
+              handleCreateSubmit={this.handleCreateSubmit.bind(this)}
               handleChange={this.handleChange}/> :
               <Redirect to={{pathname: "/login"}} />
               } path="/create" />
+            
             <Route render={
-              () => <Register handleSubmit={this.handleSubmit.bind(this)}
+              (props) => <Register {...props}
+              handleSubmit={this.handleSubmit.bind(this)}
               handleChange={this.handleChange}/>
               } path="/register" />
+            
             <Route render={
               () => <Login handleSubmit={this.handleSubmit.bind(this)}
               handleChange={this.handleChange}/>
               }path="/login"/>
+            
+            <AuthorizedRoute path="/logout" component={Logout}/>
             <Route path="/contact" component={Contact}/>
+            
           </Switch>
 
             <Footer/>

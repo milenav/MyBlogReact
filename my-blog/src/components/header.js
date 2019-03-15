@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaBraille } from 'react-icons/fa';
 
+
 class Header extends Component {
     render() {
         return (
+            
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div className="container">
                     <NavLink className="navbar-brand" to="/"><FaBraille/>      MyBlog</NavLink>
@@ -31,7 +33,7 @@ class Header extends Component {
                             {
                                 this.props.username ? 
                             (<li className="nav-item">
-                                <NavLink className="nav-link text-white" to="/">Logout</NavLink>
+                                <NavLink className="nav-link text-white" to="javascript:void(0)" onClick={this.props.onLogout}>Logout</NavLink>
                             </li>)
                             :
                             (<li className="nav-item">
