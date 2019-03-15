@@ -7,7 +7,8 @@ class CreatePost extends Component {
         this.state = {
             title: null,
             image: null,
-            content: null
+            content: null,
+            author: null
         }
         this.handleChange = props.handleChange.bind(this);
     }
@@ -24,6 +25,9 @@ class CreatePost extends Component {
             </div>
             <div className="form-group-sm">
                 <textarea className="form-control" type="text" onChange={this.handleChange} name="content" placeholder="Content"/>
+            </div>
+            <div className="form-group-sm">
+                <input className="form-control" type="text" onChange={this.handleChange} name="author" placeholder="Author"/>
             </div>
             <button className="btn btn-outline-primary" type="submit">Create Post</button>
         </form>

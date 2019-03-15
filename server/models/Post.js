@@ -13,7 +13,15 @@ const postSchema = new Schema({
   image: {
     type: String,
     required: true
-  }
+  },
+  author: {
+    type:String,
+    required: true
+  },
+  likes: [{
+    type: String
+  }],
+  reviews: []
 });
 
 module.exports = mongoose.model('Post', postSchema);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 
 import Home from './components/home';
@@ -21,6 +21,22 @@ class App extends Component {
       isAdmin: false,
       posts: []
     }
+  }
+
+  componentWillMount () {
+    const isAdmin = localStorage.getItem('isAdmin');
+
+    if(localStorage.getItem('username')){
+      this.setState({
+        username: localStorage.getItem('username'),
+        isAdmin: isAdmin
+      })
+    }
+    fetch('http://localhost:9999/feed/posts')
+    .then(rawData => rawData.json())
+    .then(body => this.setState({
+      posts: body.posts
+    }))
   }
 
   handleChange(e) {
@@ -54,6 +70,8 @@ class App extends Component {
             username: responseBody.username, 
             isAdmin: responseBody.isAdmin
           })
+          localStorage.setItem('username', responseBody.username);
+          localStorage.setItem('isAdmin', responseBody.isAdmin);
         }
       })
   }
@@ -63,10 +81,15 @@ class App extends Component {
       <div>
           <Header isAdmin={this.state.isAdmin} username={this.state.username}/>
           <Switch>
-            <Route path="/" exact component={Home}/>
+            <Route exact render={
+              () => <Home posts={this.state.posts}/>
+              } path="/" />
             <Route render={
-              () => <CreatePost handleCreateSubmit={this.handleCreateSubmit.bind(this)}
-              handleChange={this.handleChange}/>
+              () => 
+              this.state.isAdmin ?
+              <CreatePost handleCreateSubmit={this.handleCreateSubmit.bind(this)}
+              handleChange={this.handleChange}/> :
+              <Redirect to={{pathname: "/login"}} />
               } path="/create" />
             <Route render={
               () => <Register handleSubmit={this.handleSubmit.bind(this)}
