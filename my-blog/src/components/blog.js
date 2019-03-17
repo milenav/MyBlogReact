@@ -23,7 +23,7 @@ class Blog extends Component {
                             </div>
                             
                             <div className="card-body">                              
-                                <p id="content">{post.content}</p>
+                                <p id="content">{post.content.slice(0,260)} ...</p>
                             
                             <footer>
                             <div className="pull-right btn-group btn-group-justified" role="group">

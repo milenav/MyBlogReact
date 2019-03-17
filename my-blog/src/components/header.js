@@ -38,13 +38,19 @@ class Header extends Component {
                         </li>)
                             }   
                             {
-                                this.props.isAdmin ?
+                                this.props.username ?
                             (<li className="nav-item">
                             <NavLink className="nav-link text-white" to="/create">Create</NavLink>
                             </li>) 
                             : null
-
                             }  
+                            {
+                                this.props.isAdmin ?
+                            (<li className="nav-item">
+                            <NavLink className="nav-link text-white" to="/post/delete/:id">Delete</NavLink>
+                            </li>) 
+                            : null
+                            } 
                             {
                                  this.props.username ? 
                             (<li className="nav-item">
@@ -54,10 +60,7 @@ class Header extends Component {
                             (<li className="nav-item">
                             <NavLink className="nav-link text-white" to="/login">Login</NavLink>
                             </li>)
-                            }
-                            <li className="nav-item">
-                            <NavLink className="nav-link active text-white" to="/contact">Default</NavLink>
-                            </li>   
+                            } 
                  
                         </ul>
                     </div>

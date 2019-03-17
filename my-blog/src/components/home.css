@@ -31,3 +31,7 @@ main {
 .row{
     margin: 5% 0 5% 0;
 }
+
+div .post-details{
+    margin: 3% 0 5% 0;
+}

@@ -11,7 +11,7 @@ class PostDetails extends Component {
         return (
             
                 <div className="row text-left justify-content-center">
-                    <div className="card">
+                    <div>
                         <div className="post-details">
 
                         
