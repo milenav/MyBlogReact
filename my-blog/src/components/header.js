@@ -15,42 +15,50 @@ class Header extends Component {
                         </button>
                     <div className="collapse navbar-collapse" id="navbarResponsive">
                         <ul className="navbar-nav ml-auto">
-                            <li className="nav-item active">
-                                <NavLink className="nav-link active text-white" to="/">Home</NavLink>
-                            </li> 
+
                             {
                                 this.props.username ? 
                             (<li className="nav-item">
                                 <NavLink to="/" className="nav-link text-white">Welcome {this.props.username}!</NavLink>
                             </li>)
-                            
                             :
-                            (<li className="nav-item">
-                                <NavLink to="/register" className="nav-link text-white">Register</NavLink>
-                            </li>)
-                            }
-                            
+                            (<li className="nav-item active">
+                            <NavLink className="nav-link active text-white" to="/">Home</NavLink>
+                        </li>)
+           
+                            }  
                             {
                                 this.props.username ? 
                             (<li className="nav-item">
-                                <NavLink className="nav-link text-white" to="javascript:void(0)" onClick={this.props.onLogout}>Logout</NavLink>
-                            </li>)
+                                <NavLink className="nav-link active text-white" to="/blog">Blog</NavLink>
+                            </li>)   
                             :
                             (<li className="nav-item">
-                                <NavLink className="nav-link text-white" to="/login">Login</NavLink>
-                            </li>)
+                            <NavLink to="/register" className="nav-link text-white">Register</NavLink>
+                        </li>)
                             }   
-
                             {
                                 this.props.isAdmin ?
                             (<li className="nav-item">
                             <NavLink className="nav-link text-white" to="/create">Create</NavLink>
                             </li>) 
-                            : null                            
+                            : null
+
                             }  
+                            {
+                                 this.props.username ? 
+                            (<li className="nav-item">
+                                 <NavLink className="nav-link text-white" to="/" onClick={this.props.onLogout}>Logout</NavLink>
+                             </li>)
+                            :
+                            (<li className="nav-item">
+                            <NavLink className="nav-link text-white" to="/login">Login</NavLink>
+                            </li>)
+                            }
                             <li className="nav-item">
-                                <NavLink className="nav-link active text-white" to="/contact">Contact</NavLink>
-                            </li>                     
+                            <NavLink className="nav-link active text-white" to="/contact">Default</NavLink>
+                            </li>   
+                 
                         </ul>
                     </div>
                 </div>

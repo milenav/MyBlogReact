@@ -1,5 +1,4 @@
 img {
-    float: left;
     cursor: pointer;
     background: #fff;
     padding: 10px;
@@ -7,15 +6,28 @@ img {
     width: 100%;
 }
 
-#content p {
-    font-family: Arial, Helvetica, sans-serif;
-    float: right;
-    font-size: 12px;
-    line-height: 2em;
-    color: #666;
-    padding: 16px 0px;
+div .post {
+    margin: 5% ;
+    padding: 2%;
 }
 
 div .pull-right {
     float: right;
+}
+
+main {
+    columns: 2;
+}
+
+
+#details{
+    cursor: pointer;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgb(223, 223, 223);
+    width: 110%;
+}
+
+.row{
+    margin: 5% 0 5% 0;
 }

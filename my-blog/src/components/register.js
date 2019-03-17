@@ -31,7 +31,7 @@ class Register extends Component {
                     <input className="form-control" type="password" onChange={this.handleChange} name="password" placeholder="******"/>
                     <small>We'll never share your rassword with anyone else.</small>
                 </div>
-                <button className="btn btn-outline-primary" type="submit">Register</button>
+                <button className="btn btn-outline-primary" to="/" type="submit">Register</button>
             </form>
         )
     }

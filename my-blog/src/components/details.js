@@ -1,34 +1,37 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { FaThumbsUp } from 'react-icons/fa';
 import { FaThumbsDown } from 'react-icons/fa';
 import '../components/home.css';
 
+
+
 class PostDetails extends Component {
+
     render() {
         return (
-            <main>
-                <div className="bloger-content">
-                    <div className="bloger-grid">
-                        <div className="col-md-6">
+            
+                <div className="row text-left justify-content-center">
+                    <div className="card">
+                        <div className="post-details">
 
                         
-                            <article>
-                            <header>
-                                <h2>{this.props.match.params.id}</h2>
+                            
                                 
+                            <header>
+                                <h2>{this.props.match.params.id.title}</h2>
+                                <h2 className="card-title text-center">{this.props.post ? this.props.post.title : 'Test'}</h2>
+                                <h6 className="card-subtitle text-muted">{this.props.post ? this.props.post.subtitle : 'Test'}</h6>
                             </header>                                 
                             <div >
-                                <img src={this.props.match.params.id} alt=""/>
-                            </div>                               
-                                <p id="content">{this.props.match.params.id}</p>
-                            <small className="author">
-                                <p>|</p>
-                            </small>
+                                <img id="details-only" className="card-img-top" src={this.props.post ? this.props.post.image : 'Test'} alt=""/>
+                            </div> 
+                            <div className="card-body">                             
+                                <p id="content">{this.props.post ? this.props.post.content : 'Test'}</p>
+                           
                             <footer>
                             <div className="pull-right btn-group btn-group-justified" role="group">
                                 <div className="btn-group" role="group">
-                                    <Link className="btn btn-default btn-xs" to="#">Read more&raquo;</Link>
+                                    <button className="btn btn-default btn-xs" >Rate post &raquo;</button>
                                 </div>
                                 <div className="btn-group" role="group">
                                     <button type="button" className="btn btn-primary"><FaThumbsUp/></button>
@@ -38,11 +41,11 @@ class PostDetails extends Component {
                                 </div>
                             </div>
                             </footer>                        
-                            </article>
+                          </div>  
                         </div>
                     </div>
                 </div>
-            </main>
+            
         )
     }
 }

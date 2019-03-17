@@ -7,12 +7,12 @@ import Register from './components/register';
 import Login from './components/login';
 import Header from './components/header';
 import Footer from './components/footer';
-import Logout from './components/logout';
 import Contact from './components/contact';
 import CreatePost from './components/create';
 
 import PostDetails from './components/details';
-import AuthorizedRoute from './components/authorized-route';
+import Blog from './components/blog';
+
 
 
 
@@ -26,6 +26,7 @@ class App extends Component {
       posts: [],
       selectedPostId: 0
     }
+    
   }
 
 
@@ -62,6 +63,8 @@ class App extends Component {
     }).then(rawData => rawData.json())
     .then(body => console.log(body))
   }
+
+
 
   handleSubmit(e, data, isSignup) {
     e.preventDefault();
@@ -102,7 +105,7 @@ class App extends Component {
           <Switch>
           <Route render={
               (props) => <PostDetails {...props} 
-              post={this.state.posts[this.state.selectedPostId]} />
+              post={this.state.posts[0]} />
               } path="/post/:id" />
             
             <Route exact render={
@@ -117,7 +120,7 @@ class App extends Component {
               handleChange={this.handleChange}/> :
               <Redirect to={{pathname: "/login"}} />
               } path="/create" />
-            
+              
             <Route render={
               (props) => <Register {...props}
               handleSubmit={this.handleSubmit.bind(this)}
@@ -125,11 +128,16 @@ class App extends Component {
               } path="/register" />
             
             <Route render={
-              () => <Login handleSubmit={this.handleSubmit.bind(this)}
+              () => <Login 
+              handleSubmit={this.handleSubmit.bind(this)}
               handleChange={this.handleChange}/>
               }path="/login"/>
-            
-            <AuthorizedRoute path="/logout" component={Logout}/>
+
+            <Route  render={
+              (props) => <Blog {...props} posts={this.state.posts}/>
+              } path="/blog" />
+
+
             <Route path="/contact" component={Contact}/>
             
           </Switch>
